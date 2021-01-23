@@ -11,93 +11,97 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const Employee = require("./lib/Employee");
 
-function appMenu(){
-    function createManager(){
-        console.log("Please build your team.");
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'managerName',
-                message: "What is your manager's name?", 
-            }, 
-            {
-                type: 'input',
-                name: 'managerId',
-                message: "What is your manager's id?",
-            },
-            {
-                type:'input',
-                name: 'managerEmail',
-                message: "What is your manager's email?",
-            },
-            {
-                type: 'input',
-                name: 'managerOfficeNumber',
-                message: "What is your manager's office number?",
-            },
-        ]).then(answers => {
-            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
-            console.log(manager);
-        });
-    }
-
-    createManager()
-
-    function createEmployee(){
-    console.log('Who is in your team?');
-        inquirer.prompt([
-            {
-                type: 'input',
-                name: 'name',
-                message: 'What is your name?',
-            },
-            {
-                type: 'input',
-                name: 'id',
-                message: 'What is your id?',
-            },
-            {
-                type: 'input',
-                name: 'email',
-                message: 'What is your email?',
-            },
-        ]).then(answers => { 
-            const employee = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail);
-            console.log(employee);
-        });
-    }  
-
-    createEmployee()
-
-    function createEngineer(){
-    console.log('Who is in your team?');
-        inquirer.prompt([
-            {
-                type: 'input', 
-                name: 'github',
-                message: 'What is your GitHub username?',
-            },
-            {
-                type: 'input',
-                name: 'id',
-                email: 'What is your id?'
-            }, 
-            {
-                type: 'input',
-                name: 'email',
-                message: 'What is your email?',
-            },
-        ]).then(answers => {
-            const engineer = new Engineer(answers.engineerGithub);
-        });
-    }
-
-    createEngineer()
+function appMenu() {
+    createManager();
 }
-appMenu()
+function createManager() {
+    console.log("Please build your team.");
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'managerName',
+            message: "What is your manager's name?",
+        },
+        {
+            type: 'input',
+            name: 'managerId',
+            message: "What is your manager's id?",
+        },
+        {
+            type: 'input',
+            name: 'managerEmail',
+            message: "What is your manager's email?",
+        },
+        {
+            type: 'input',
+            name: 'managerOfficeNumber',
+            message: "What is your manager's office number?",
+        },
+        {
+            type: 'list',
+            name: 'addEmployee',
+            message: 'Would you like to add another employee to your team?'
+
+        }
+    ]).then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+        console.log(manager);
+        //createTeam();Which member would you like to build?
+    });
+}
+
+function createEmployee() {
+    console.log('Who is in your team?');
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'What is your id?',
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email?',
+        },
+    ]).then(answers => {
+        const employee = new Employee(answers.employeeName, answers.employeeId, answers.employeeEmail);
+        console.log(employee);
+    });
+}
+
+
+function createEngineer() {
+    console.log('Who is in your team?');
+    inquirer.prompt([
+        {
+            type: 'input',
+            name: 'github',
+            message: 'What is your GitHub username?',
+        },
+        {
+            type: 'input',
+            name: 'id',
+            email: 'What is your id?'
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email?',
+        },
+    ]).then(answers => {
+        const engineer = new Engineer(answers.engineerGithub);
+    });
+}
+
+appMenu();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-render(require);
+render(employee, engineer, intern, manager);
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
