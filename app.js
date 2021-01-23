@@ -77,6 +77,16 @@ function appMenu(){
                 name: 'github',
                 message: 'What is your GitHub username?',
             },
+            {
+                type: 'input',
+                name: 'id',
+                email: 'What is your id?'
+            }, 
+            {
+                type: 'input',
+                name: 'email',
+                message: 'What is your email?',
+            },
         ]).then(answers => {
             const engineer = new Engineer(answers.engineerGithub);
         });
@@ -87,7 +97,7 @@ function appMenu(){
 appMenu()
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-
+render(require);
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
